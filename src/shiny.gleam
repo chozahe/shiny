@@ -36,3 +36,17 @@ pub fn validate(draft: Draft(a)) -> Result(a, List(Problem)) {
     False -> Error(draft.problems)
   }
 }
+
+/// Add a problem if predicate returns False.
+pub fn ensure(
+  draft: Draft(a),
+  predicate: fn(a) -> Bool,
+  code: ProblemCode,
+  message: String,
+) -> Draft(a) {
+  case predicate(draft.value) {
+    True -> draft
+    False ->
+      Draft(draft.value, list.prepend(draft.problems, Problem(code, message)))
+  }
+}
