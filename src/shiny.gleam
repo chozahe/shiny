@@ -67,3 +67,31 @@ pub fn custom(
       )
   }
 }
+
+pub fn problems(draft: Draft(a)) -> List(Problem) {
+  draft.problems
+}
+
+pub fn has_problems(draft: Draft(a)) -> Bool {
+  list.is_empty(draft.problems)
+}
+
+pub fn problem_count(draft: Draft(a)) -> Int {
+  list.length(draft.problems)
+}
+
+pub fn value(draft: Draft(a)) -> a {
+  draft.value
+}
+
+pub fn problem(code: ProblemCode, message: String) -> Problem {
+  Problem(code, message)
+}
+
+pub fn code(problem: Problem) -> ProblemCode {
+  problem.code
+}
+
+pub fn message(problem: Problem) -> String {
+  problem.message
+}
