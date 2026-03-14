@@ -50,3 +50,20 @@ pub fn ensure(
       Draft(draft.value, list.prepend(draft.problems, Problem(code, message)))
   }
 }
+
+/// Add a custom-named problem if predicate returns False
+pub fn custom(
+  draft: Draft(a),
+  predicate: fn(a) -> Bool,
+  code: String,
+  message: String,
+) -> Draft(a) {
+  case predicate(draft.value) {
+    True -> draft
+    False ->
+      Draft(
+        draft.value,
+        list.prepend(draft.problems, Problem(Custom(code), message)),
+      )
+  }
+}
